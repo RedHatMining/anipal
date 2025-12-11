@@ -9,6 +9,7 @@ export default function Search() {
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
+    const [hasNextPage, setHasNextPage] = useState(false);
 
     const navigate = useNavigate();
 
@@ -22,6 +23,7 @@ export default function Search() {
             .then((data) => {
                 console.log("Raw search data:", data);
                 setResults(Array.isArray(data.animes) ? data.animes : []);
+                setHasNextPage(data.hasNextPage);
                 setLoading(false);
             })
             .catch((err) => {
@@ -53,6 +55,7 @@ export default function Search() {
     };
 
     const handleNextPage = () => {
+        console.log("Current results length:", results);
         if (results.length > 0) setPage(page + 1);
     };
 
@@ -71,7 +74,7 @@ export default function Search() {
                             ← Previous
                         </button>
                         <span>Page {page}</span>
-                        <button onClick={handleNextPage} disabled={results.length === 0}>
+                        <button onClick={handleNextPage} disabled={hasNextPage === false}>
                             Next →
                         </button>
                     </div>
