@@ -63,6 +63,28 @@ ipcMain.handle("search-anime", async (event, { query, page }) => {
     }
 });
 
+ipcMain.handle("get-anime-details", async (event, animeId) => {
+    try {
+        const details = await aniwatch.getInfo(animeId);
+        console.log("Anime details:", details);
+        return details;
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
+});
+
+ipcMain.handle("get-anime-episodes", async (event, animeId) => {
+    try {
+        const episodes = await aniwatch.getEpisodes(animeId);
+        console.log("Anime episodes:", episodes);
+        return episodes;
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
+});
+
 // Local JSON data
 ipcMain.handle("get-user-data", () => readJSON("user.json"));
 ipcMain.handle("get-progress", () => readJSON("progress.json"));
