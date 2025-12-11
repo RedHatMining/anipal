@@ -515,8 +515,61 @@ body {
 
 /* Season Item Specific */
 .season-item {
+    flex: 0 0 180px;
+    display: flex;
+    flex-direction: column;
+    background: rgba(21, 21, 23, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    overflow: hidden;
 }
+
+    .season-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(139, 69, 255, 0.05), rgba(124, 58, 237, 0.03));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 0;
+    }
+
+    .season-item:hover {
+        transform: translateY(-8px);
+        border-color: rgba(139, 69, 255, 0.2);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(139, 69, 255, 0.1);
+    }
+
+        .season-item:hover::before {
+            opacity: 1;
+        }
+
+    .season-item img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        transition: transform 0.3s ease;
+        position: relative;
+        z-index: 1;
+    }
+
+    .season-item p {
+        margin-top: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.9);
+        position: relative;
+        z-index: 1;
+    }
 
     .current-badge {
         position: absolute;
